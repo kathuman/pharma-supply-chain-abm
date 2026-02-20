@@ -2,3 +2,4 @@ mesa
 streamlit
 pandas
 matplotlib
+networkx
