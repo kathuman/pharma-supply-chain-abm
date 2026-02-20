@@ -1,4 +1,4 @@
-import mesa
+from mesa import Model, Agent
 import random
 
 class PharmaAgent(mesa.Agent):
@@ -24,7 +24,12 @@ class PharmaAgent(mesa.Agent):
 
 class PharmaModel(mesa.Model):
     def __init__(self, n_agents, init_stock, capacity):
-        self.schedule = mesa.time.RandomActivation(self)
+        super().__init__() # Initialize the parent Model class
+        
+        # FIX: In Mesa 2.0+, use mesa.time.BaseScheduler 
+        # or simply use the model's internal self.steps if not using a complex scheduler.
+        # However, for a standard step-through, this is the current syntax:
+        self.schedule = mesa.time.BaseScheduler(self)
         types = ["Starting Material", "API", "Spray Drying", "Tabletting", "Packaging", "Hospital"]
         
         for i in range(len(types)):
